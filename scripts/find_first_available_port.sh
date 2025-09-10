@@ -10,7 +10,8 @@ if [[ ! "${PORT_LOWEST}" -lt "${PORT_HIGHEST}" ]]; then
 fi
 
 for port in $(seq "${PORT_LOWEST}" "${PORT_HIGHEST}"); do
-	if ! netstat -an | grep "LISTEN" | grep "[.:]${port}[^0-9]" >/dev/null ; then
+	#if ! netstat -an | grep "LISTEN" | grep "[.:]${port}[^0-9]" >/dev/null ; then
+	if ! ss -ln | grep "LISTEN" | grep "[.:]${port}[^0-9]" >/dev/null ; then
 		echo "${port}"
 		break
 	fi
